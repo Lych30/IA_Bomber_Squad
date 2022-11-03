@@ -16,23 +16,28 @@ namespace BomberTeam {
         public AnimationCurve DistanceScore;
         public List<WayPointView> Points;
         public List<AsteroidView> Asteroids;
-        private Vector3 closest;
+        private Vector2 closest;
         public float AngleView;
         public override void Initialize(SpaceShipView spaceship, GameData data)
         {
             Points = data.WayPoints;
             Asteroids = data.Asteroids;
-            closest = Points[0].Position;
+            closest = new Vector3(0,0,0);
+            
             foreach (WayPointView point in Points)
             {
-                if (((Vector3)point.Position - transform.position).magnitude <= ((Vector3)closest - transform.position).magnitude)
+                if (Vector2.Distance(point.Position, spaceship.Position) < Vector2.Distance(closest, spaceship.Position))
                 {
+                    
                     closest = point.Position;
+                    
 
                 }
-
+                
             }
             Debug.Log(closest);
+
+
 
         }
 
@@ -67,21 +72,22 @@ namespace BomberTeam {
                 Tempdir = transform.InverseTransformDirection(Tempdir);
                 float Tempangle = Mathf.Abs(Mathf.Atan2(Tempdir.y, Tempdir.x) * Mathf.Rad2Deg);
 
-                float score = 1 / ((Vector3)point.Position - transform.position).magnitude;
+                float score = 1 / (point.Position - spaceship.Position).magnitude;
 
 
-                if (Tempangle <= AngleView / 2)
+                
+
+                if ((point.Position - spaceship.Position).magnitude <= (closest - spaceship.Position).magnitude)
                 {
-                    score *= (AngleScoreCurve.Evaluate(Tempangle / (AngleView / 2)));
-                   
-                }
-
-                if (((Vector3)point.Position - transform.position).magnitude <= (closest - transform.position).magnitude)
-                {
-                    score += DistanceScore.Evaluate(((Vector3)point.Position - transform.position).magnitude / 11);
+                    score *= DistanceScore.Evaluate(((Vector3)point.Position - transform.position).magnitude / 11)*5;
                     //Debug.Log(((Vector3)point.Position - transform.position).magnitude);
                 }
 
+                if (Tempangle <= AngleView / 2)
+                {
+                    score *= AngleScoreCurve.Evaluate(Tempangle / (AngleView / 2));
+
+                }
                 if (point.Owner == spaceship.Owner)
                 {
                     score = 0;
