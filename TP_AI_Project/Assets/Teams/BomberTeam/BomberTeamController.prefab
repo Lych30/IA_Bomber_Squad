@@ -46,6 +46,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorTree: {fileID: 3039252958360588374}
+  AngleScoreCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0077732773
+      outSlope: -0.0077732773
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.50034523
+      value: 0.9961107
+      inSlope: -0.07266631
+      outSlope: -5.5882363
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.17079099
+      outWeight: 0.03752634
+    - serializedVersion: 3
+      time: 0.9986572
+      value: -0.003768921
+      inSlope: -0.08696073
+      outSlope: -0.08696073
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17287295
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DistanceScore:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0077732773
+      outSlope: -0.0077732773
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.50034523
+      value: 0.9961107
+      inSlope: -0.07266631
+      outSlope: -5.5882363
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.17079099
+      outWeight: 0.03752634
+    - serializedVersion: 3
+      time: 0.9986572
+      value: -0.003768921
+      inSlope: -0.08696073
+      outSlope: -0.08696073
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17287295
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AngleView: 90
 --- !u!114 &3039252958360588374
 MonoBehaviour:
   m_ObjectHideFlags: 0
