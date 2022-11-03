@@ -9,9 +9,15 @@ using TaskStatus = BehaviorDesigner.Runtime.Tasks.TaskStatus;
 
 public class CanHitEnemy : Conditional
 {
+    private BehaviorTree behaviorTree;
+
+    public override void OnStart()
+    {
+        behaviorTree = this.gameObject.GetComponent<BehaviorTree>();
+    }
+
     public override TaskStatus OnUpdate()
     {
-        BehaviorTree behaviorTree = this.gameObject.GetComponent<BehaviorTree>();
         if (CanHit((Vector2)behaviorTree.GetVariable("shipPosition").GetValue(), (float)behaviorTree.GetVariable("shipOrientation").GetValue(), (Vector2)behaviorTree.GetVariable("otherShipPosition").GetValue(), (Vector2)behaviorTree.GetVariable("otherShipVelocity").GetValue(), 0.15f))
         {
             return TaskStatus.Success;

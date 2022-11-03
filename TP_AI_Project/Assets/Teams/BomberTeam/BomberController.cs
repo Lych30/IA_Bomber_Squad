@@ -28,10 +28,18 @@ namespace BomberTeam {
 			BehaviorTree.SetVariableValue("otherShipPosition", otherSpaceship.Position);
 			BehaviorTree.SetVariableValue("otherShipVelocity", otherSpaceship.Velocity);
 			
+			BehaviorTree.SetVariableValue("shipCurrentEnergy", spaceship.Energy);
+			
 			bool shootNext = (bool)BehaviorTree.GetVariable("shootNext").GetValue();
 			if (shootNext) BehaviorTree.SetVariableValue("shootNext", false);
 			
-			return new InputData(thrust, targetOrient, shootNext, false, false);
+			bool useShockwaveNext = (bool)BehaviorTree.GetVariable("useShockwaveNext").GetValue();
+			if (useShockwaveNext) BehaviorTree.SetVariableValue("useShockwaveNext", false);
+			
+			bool useMineNext = (bool)BehaviorTree.GetVariable("useMineNext").GetValue();
+			if (useMineNext) BehaviorTree.SetVariableValue("useMineNext", false);
+			
+			return new InputData(thrust, targetOrient, shootNext, useMineNext, useShockwaveNext);
 		}
 	}
 
