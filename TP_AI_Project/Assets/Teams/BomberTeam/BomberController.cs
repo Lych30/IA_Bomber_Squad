@@ -57,11 +57,24 @@ namespace BomberTeam {
 			if (shootNext) BehaviorTree.SetVariableValue("shootNext", false);
 			
 			bool useShockwaveNext = (bool)BehaviorTree.GetVariable("useShockwaveNext").GetValue();
-			if (useShockwaveNext) BehaviorTree.SetVariableValue("useShockwaveNext", false);
+
+            if (Vector2.Distance(spaceship.Position, otherSpaceship.Position) < 0.2f)
+            {
+                BehaviorTree.SetVariableValue("useShockwaveNext", true);
+            }
+            if (useShockwaveNext) BehaviorTree.SetVariableValue("useShockwaveNext", false);
 			
 			bool useMineNext = (bool)BehaviorTree.GetVariable("useMineNext").GetValue();
-			if (useMineNext) BehaviorTree.SetVariableValue("useMineNext", false);
 
+            if ((closest - spaceship.Position).magnitude < 0.2f && spaceship.Energy > 0.6f)
+            {
+                BehaviorTree.SetVariableValue("useMineNext", true);
+            }
+
+
+            if (useMineNext) BehaviorTree.SetVariableValue("useMineNext", false);
+
+            
 
 
             //Movement
@@ -101,6 +114,9 @@ namespace BomberTeam {
 
 
             }
+
+            
+            
             float thrust = 1f;
             float angle = AimingHelpers.ComputeSteeringOrient(spaceship, closest, 1.2f);
             float targetOrient = transform.rotation.z + angle;
